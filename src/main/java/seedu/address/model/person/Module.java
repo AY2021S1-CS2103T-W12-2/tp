@@ -3,9 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javafx.collections.ObservableList;
 import seedu.address.model.TaskList;
 import seedu.address.model.TutorialGroup;
 
@@ -25,7 +23,7 @@ public class Module {
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     private final String moduleId;
-    private List<TutorialGroup> tutorialGroups;
+    private UniqueTutorialGroupList tutorialGroups;
     private TaskList taskList;
     private int totalStudents = 0;
     private int totalGroups = 0;
@@ -39,7 +37,7 @@ public class Module {
         requireNonNull(moduleId);
         checkArgument(isValidModuleId(moduleId), MESSAGE_CONSTRAINTS);
         this.moduleId = moduleId;
-        this.tutorialGroups = new ArrayList<>();
+        this.tutorialGroups = new UniqueTutorialGroupList();
         this.taskList = new TaskList();
     }
 
@@ -68,17 +66,14 @@ public class Module {
         tutorialGroups.add(tutorialGroup);
     }
 
-    public void removeTutorialGroup(TutorialGroup tutorialGroup) {
-        tutorialGroups.remove(tutorialGroup);
-    }
+    // Todo: uncomment when remove added to UniqueTutorialGroupList
+//    public void removeTutorialGroup(TutorialGroup tutorialGroup) {
+//        tutorialGroups.remove(tutorialGroup);
+//    }
 
-    //    public void addTask(Task task) {
-    //        tasks.add(task);
-    //    }
-    //
-    //    public void removeTask(Task task) {
-    //        tasks.remove(task);
-    //    }
+    public ObservableList<TutorialGroup> getTutorialGroupList() {
+        return this.tutorialGroups.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {

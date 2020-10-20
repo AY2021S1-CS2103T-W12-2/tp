@@ -45,6 +45,13 @@ public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<TutorialGroup> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
     @Override
     public Iterator<TutorialGroup> iterator() {
         return internalList.iterator();
