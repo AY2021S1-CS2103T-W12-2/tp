@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.Showable;
 import seedu.address.model.TaskList;
 import seedu.address.model.TutorialGroup;
 
@@ -11,7 +12,7 @@ import seedu.address.model.TutorialGroup;
  * Represents a Student's Module in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleId(String)}
  */
-public class Module {
+public class Module implements Showable {
     public static final String MESSAGE_CONSTRAINTS = "Modules can take any values, and it should not be blank";
 
     /*

@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.Showable;
+import seedu.address.model.TutorialGroup;
 import seedu.address.model.person.Module;
 
 public class ModuleCard extends UiPart<Region> {
@@ -17,7 +19,7 @@ public class ModuleCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Module module;
+    public final Showable module;
 
     @FXML
     private HBox cardPane;
@@ -35,16 +37,27 @@ public class ModuleCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ModuleCard(Module module, int displayedIndex) {
+    public ModuleCard(Showable showable, int displayedIndex) {
         super(FXML);
-        this.module = module;
-        id.setText(displayedIndex + ". ");
-        moduleId.setText(module.getModuleId());
-        totalStudents.setText("Total Students: " + module.getTotalStudents());
-        totalGroups.setText("Total Groups: " + module.getTotalGroups());
-        //        person.getTags().stream()
-        //                .sorted(Comparator.comparing(tag -> tag.tagName))
-        //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        this.module = showable;
+
+        if (showable instanceof Module) {
+            Module module = (Module) showable;
+            id.setText(displayedIndex + ". ");
+            moduleId.setText(module.getModuleId());
+            totalStudents.setText("Total Students: " + module.getTotalStudents());
+            totalGroups.setText("Total Groups: " + module.getTotalGroups());
+            //        person.getTags().stream()
+            //                .sorted(Comparator.comparing(tag -> tag.tagName))
+            //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        } else if (showable instanceof TutorialGroup) {
+            TutorialGroup tg = (TutorialGroup) showable;
+            id.setText(displayedIndex + ". ");
+            moduleId.setText(tg.getId());
+        } else {
+            moduleId.setText("FOR STUDENT");
+        }
+
     }
 
     @Override
